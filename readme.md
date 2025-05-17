@@ -10,7 +10,7 @@ HTML,CSS のみを使用して簡単に Web サイトを構築することがで
 
 1. 下記の画像を参考にプロジェクトをダウンロードしてください。
 
-![alt text](image.png)
+![alt text](code/desc/image.png)
 
 2. ダウンロードしたファイルを解凍して、プロジェクトを vscode で開いてください。
 
