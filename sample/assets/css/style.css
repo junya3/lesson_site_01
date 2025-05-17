@@ -1,0 +1,418 @@
+@charset "utf-8";
+/* utf-8でこれから記述していきます。これがないと文字化けを起こしたりします。 */
+
+/* common 常用 */
+/* [*]はユニバーサルセレクタといい、すべての要素に適応することができます。ただし優先順位は低いです。 */
+* {
+  /* border-boxを指定することでborderまでの幅をwidthで指定することができます */
+  /* 初期値はcontent-boxですが、この値だと要素にwidth:100%;padding:10%;を指定すると、幅が120%になってしまう。それをborder-boxであるとpaddingをあとから指定してもデカくなることはありません。*/
+  /* わからなかったら口答で説明します */
+  box-sizing: border-box;
+
+  /* 文字間隔を指定します */
+  letter-spacing: 0.04em;
+  /* 行間を指定 */
+  line-height: 1.5;
+}
+html {
+  /* ここに16pxを指定すると他の要素で1remを指定したときに1rem=16pxとなります */
+  /* 例）2rem = 32px */
+  font-size: 16px;
+  /* リンク先へのスクロールを滑らかにします。 */
+  scroll-behavior: smooth;
+  /* フォントの指定 */
+  font-family: 'M PLUS 1', sans-serif;
+}
+
+a {
+  /* 青色なので初期化して、デコレーションもなしにします。 */
+  color: #212121;
+  text-decoration: none;
+  line-height: 1.5;
+}
+/* hover = マウスを乗せたときの挙動 */
+a:hover {
+  /* hoverした際は下線が出るようにします。 */
+  text-decoration: underline;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  /* 画像を崩さず拡大する */
+  object-fit: cover;
+  /* imgはinline要素なのでbottomを指定する必要がある。 */
+  /* じゃないと変な余白ができる */
+  vertical-align: bottom;
+}
+
+main {
+  width: 100%;
+}
+.container {
+  /* 幅を100%-4rem、最大幅を1280pxに指定 */
+  width: calc(100% - 4rem);
+  max-width: 1280px;
+  /* 左右(inline)の余白を自動化させることで中央揃えになります */
+  margin-inline: auto;
+}
+section {
+  /* sectionに上60px下80pxの余白を指定 */
+  /* 〜〜-blockは上下を指します。単一で指定すると上も下も同じ値になります。 */
+  padding-block: 60px 80px;
+  /* ナビゲーションを使って遷移したときに上余白70px設けてあげるとちょうどいい位置に来る */
+  scroll-margin: 70px;
+}
+
+/* header ヘッダーセクション */
+
+.header {
+  width: 100%; /* 幅100% */
+  display: flex; /* 横並びにする */
+  align-items: center; /* 横軸を中央にする */
+  justify-content: space-between; /* 端と端で揃える */
+  /* paddingは要素を太らせることができます */
+  padding: 1rem 2rem; /* 内部余白は縦：16px 横：32px */
+
+  /* 背景色は白色です */
+  background-color: color-mix(in srgb, #fff 85%, #0000);
+  /* 下に1pxの薄いグレーの実線を追加してください */
+  border-bottom: 1px solid color-mix(in srgb, #efefef 85%, #0000);
+
+  /* 配置は画面上部に固定　重なり順は一番上*/
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+
+.header .logo a {
+  font-size: 1.5rem; /* fontのサイズを指定 */
+  font-weight: 600; /* fontの太さを指定100~900まで100ずつ指定できます。 */
+  color: #212121;
+}
+.header .logo a:hover {
+  /* ちょっと上級技：指定の仕方はSRGB、黒色と透明を半分混ぜたものを使います */
+  color: color-mix(in srgb, #212121 50%, #0000);
+  text-decoration: none;
+}
+
+.header nav ul {
+  display: flex;
+  gap: 1rem; /* 間隔を指定 */
+}
+.header ul a {
+  font-size: 1rem;
+  /* 内部テキストをすべて大文字にします。 */
+  text-transform: uppercase;
+  color: #212121;
+}
+.header ul a:hover {
+  color: color-mix(in srgb, #212121 50%, #0000);
+  text-decoration: none;
+}
+
+/* keyvisual */
+.keyvisual {
+  width: 100%;
+  /* 内部要素に高さを依存 */
+  height: fit-content;
+  /* 相対配置になり（通常の配置）かつ、配置基準にします */
+  position: relative;
+}
+.keyvisual picture img {
+  width: 100%;
+  /* 高さは自動で最大の高さは画面高さの90%です */
+  height: auto;
+  max-height: 90vh;
+
+  position: relative;
+  /* 重なりは下 */
+  z-index: 0;
+}
+.box-shadow {
+  /* 絶対位置（相対配置）になる */
+  position: absolute;
+  background-color: color-mix(in srgb, #000 40%, #0000);
+  inset: 0;
+  /* 重なりはimgよりひとつ上 */
+  z-index: 1;
+}
+.kv-text {
+  /* 幅と高さは中の要素に依存します */
+  width: fit-content;
+  height: fit-content;
+  text-align: center; /* テキストを中央寄せ */
+  position: absolute; /* 絶対位置配置 */
+  margin: auto;
+  inset: 0; /* top,left,right,bottomを0 */
+  z-index: 10; /* 重ね順を上に持っていきます */
+  color: #fff;
+}
+.kv-text h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.kv-text p {
+  font-size: 1rem;
+}
+
+/* col-2 */
+
+.col-2 {
+  width: 100%;
+  display: flex;
+  gap: 2.5rem;
+}
+/* col-2かつreverseの場合 */
+.col-2.reverse {
+  /* 反対 */
+  flex-direction: row-reverse;
+}
+.col-2 > * {
+  flex: 1;
+}
+.col-2 img {
+  /* 角丸の値を指定 */
+  border-radius: 0.5rem;
+}
+.col-2 .sec-text {
+  /* 縦に2rem、横に0px太らせます */
+  padding: 2rem 0;
+}
+/* about col-2 */
+#about .sec-text > p {
+  /* 横（inline）に1rem太らせます */
+  padding-inline: 1rem;
+}
+.sec-text hgroup {
+  /* bottom: 下のみ、inline:横のみ */
+  padding-bottom: 1rem;
+  padding-inline: 1rem;
+  margin-bottom: 1rem;
+  /* 下に2pxの実線を描画します */
+  border-bottom: 2px solid color-mix(in srgb, #a99177 60%, #0000);
+}
+.sec-text hgroup h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.sec-text hgroup p {
+  font-size: 0.875rem;
+}
+/* access col-2 */
+.col-2 address {
+  /* padding（要素の余白）、margin（要素と要素の距離） */
+  /* marginは要素同士で相殺されます（わからんかったら聞いて） */
+  padding-bottom: 1rem;
+  padding-inline: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid color-mix(in srgb, #a99177 60%, #0000);
+}
+/* ここからは記述が多くなると思うので楽な書き方にしてます */
+.col-2 address {
+  font-size: 0.875rem;
+  /* これだと.col-2 address strongの指定をしているのと一緒です */
+  /* 中に一緒に書くことをネストといいます */
+  strong {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 2;
+  }
+}
+.col-2 section {
+  padding: 0 1rem;
+  margin: 1rem 0;
+  /* ここも.col-2 sectionにあるそれぞれの要素について指定をしています */
+  h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  ul {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 0.875rem;
+    color: color-mix(in srgb, #212121 50%, #0000);
+  }
+}
+
+/* menu */
+#menu {
+  background-color: #c8bdb1;
+  /* box-shadowは右:0px,左:0px,ぼかし:0px,膨張:100vmax(画面いっぱいに広げる) */
+  /* clip-pathで横をカットせず、縦を要素に合わせてカットすることで横長の背景を作ることができる */
+  box-shadow: 0 0 0 100vmax #c8bdb1;
+  clip-path: inset(0 -100vmax);
+}
+.center-heading {
+  /* capitalize：頭文字のみ大文字 */
+  text-transform: capitalize;
+  /* 文字揃え：中央寄せ */
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.center-heading.white {
+  color: #fff;
+}
+.center-heading h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.center-heading p {
+  font-size: 0.875rem;
+}
+
+.item-container {
+  width: 100%;
+  max-width: 1000px;
+  margin-inline: auto;
+  /* 配置：グリッドレイアウトに変更 */
+  display: grid;
+  /* 縦の並びは中の箱が350px以上だったら自動で調整 */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.item-container .item {
+  /* 配置：グリッドレイアウト */
+  display: grid;
+  /* 行の高さは周りの要素に合わせる */
+  grid-template-rows: subgrid;
+  grid-row: span 2;
+  gap: 0;
+  border-radius: 0.5rem;
+  /* 飛び出しているものがあったら非表示 */
+  overflow: hidden;
+  box-shadow: 2px 2px 8px color-mix(in srgb, #a99177 60%, #0000);
+}
+.item-container .item .item-text {
+  padding: 1rem;
+  background-color: #fff;
+}
+.item-container .item img {
+  /* 画像の比率を4対3 */
+  aspect-ratio: 4/3;
+}
+.item-text .name {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+}
+.item-text .val {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  /* before,afterは疑似要素と言ってHTMLの記述に影響を与えず、
+  コンテンツの内容やスタイルを変更することができます */
+  &::before {
+    /* ¥をテキストの前に入れます */
+    content: '\00A5'; /* Unicodeで円マーク */
+    margin-right: 0.2rem;
+  }
+  &::after {
+    /* マイナスをテキストのあとに配置します */
+    content: '-';
+    margin-left: 0.2rem;
+  }
+}
+.item-text .detail {
+  font-size: 0.875rem;
+}
+
+/* contact */
+#contact {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  overflow: hidden;
+}
+.contact-img {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  /* 要素を絶対位置では位置し、中央に配置します */
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+.contact-text {
+  position: relative;
+  text-align: center;
+  z-index: 10;
+
+  color: #fff;
+  line-height: 1.5;
+}
+.c-btn {
+  /* 要素をブロック要素に変更します */
+  display: block;
+  /* 幅と高さはコンテンツに依存します */
+  width: fit-content;
+  height: fit-content;
+  /* 要素と要素の距離は上に2rem,左右は自動、下は0px */
+  margin: 2rem auto 0;
+  padding: 0.5rem 2rem;
+  background-color: color-mix(in srgb, #fff 20%, #0000);
+  color: #fff;
+  border: 1px solid;
+}
+.c-btn:hover {
+  background-color: color-mix(in srgb, #fff 40%, #0000);
+  text-decoration: none;
+}
+
+footer {
+  text-align: center;
+  background-color: #212121;
+  color: #fff;
+  padding: 1rem 0;
+  font-size: 0.75rem;
+}
+
+/* これ以降は余裕があれば実施してください */
+/* タブレットサイズ 以下であれば適応*/
+@media screen and (max-width: 768px) {
+  .col-2,
+  .col-2.reverse {
+    /* 縦並びの反対 */
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+  .col-2 .sec-text {
+    padding: 0;
+  }
+}
+/* スマホ対応 425px以下だったら適応*/
+@media screen and (max-width: 425px) {
+  html {
+    /* ごめん、ここで楽しました */
+    font-size: calc(16px * 0.85);
+  }
+  .header {
+    flex-direction: column;
+    align-items: start;
+  }
+  .keyvisual {
+    height: 50vh;
+    picture img {
+      height: 100%;
+    }
+    .kv-text {
+      padding-top: 3rem;
+      h1 {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 0.875rem;
+      }
+    }
+  }
+  .contact-img {
+    height: 100%;
+    img {
+      height: 100%;
+    }
+  }
+}
